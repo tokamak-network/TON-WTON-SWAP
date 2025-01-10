@@ -1,13 +1,7 @@
 "use client";
 
 import { Flex } from "@chakra-ui/react";
-import { l1Chain, l2Chain } from "@/config/network";
 import { Chain, mainnet, sepolia } from "wagmi/chains";
-import L1NetworkIcon from "@/assets/icons/network/l1-network.svg";
-import L2NetworkIcon from "@/assets/icons/network/l2-network.svg";
-import Image from "next/image";
-import { ChainLayerEnum } from "@/types/network";
-import { getChainLayer } from "@/utils/network";
 import { MenuContent, MenuItem } from "../ui/menu";
 import { NetworkSymbolComponent } from "../icons/NetworkSymbol";
 

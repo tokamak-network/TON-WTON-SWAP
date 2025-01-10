@@ -1,19 +1,11 @@
 "use client";
 import { Flex } from "@chakra-ui/react";
 import { useWalletConnect } from "@/hooks/wallet-connect/useWalletConnect";
-import Image from "next/image";
 import { Button } from "../ui/button";
-import WrongNetworkIcon from "@/assets/icons/network/wrong-network.svg";
-import L1NetworkIcon from "@/assets/icons/network/l1-network.svg";
-import L2NetworkIcon from "@/assets/icons/network/l2-network.svg";
 import dynamic from "next/dynamic";
-import { getChainLayer } from "@/utils/network";
-import { useMemo } from "react";
-import { ChainLayerEnum } from "@/types/network";
 import { MenuRoot, MenuTrigger } from "@/components/ui/menu";
 import { NetworkListComponent } from "./NetworkList";
 import { useNetwork } from "@/hooks/network/useNetwork";
-import { l1Chain } from "@/config/network";
 import { mainnet } from "viem/chains";
 import { NetworkSymbolComponent } from "../icons/NetworkSymbol";
 

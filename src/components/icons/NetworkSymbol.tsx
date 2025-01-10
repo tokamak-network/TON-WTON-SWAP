@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { ChainLayerEnum } from "@/types/network";
 import EthereumIcon from "@/assets/icons/network/ethereum-network.svg";
 import SepoliaIcon from "@/assets/icons/network/sepolia-network.svg";
 import UnknownNetworkIcon from "@/assets/icons/network/wrong-network.svg";

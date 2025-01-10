@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  jotaiBridgeTransactionInfo,
-  jotaiIsInsufficient,
-  jotaiTokenSelectModalOpen,
-} from "@/jotai/bridge";
-import { BridgeTransactionInfo } from "@/types/bridge";
+import { jotaiIsInsufficient } from "@/jotai/bridge";
 import { ButtonProps, Flex, Input, Text } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import React from "react";

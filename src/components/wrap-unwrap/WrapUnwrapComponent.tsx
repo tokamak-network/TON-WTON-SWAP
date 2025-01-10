@@ -11,10 +11,10 @@ import { useState } from "react";
 import { WrapUnwrapModeEnum } from "@/types/wrap-unwrap";
 export const WrapUnwrapComponent: React.FC = () => {
   const { isConnected } = useWalletConnect();
-  const [transaction, setTransaction] = useAtom(jotaiWrapUnwrapTransactionInfo);
+  const [transaction] = useAtom(jotaiWrapUnwrapTransactionInfo);
   const [isInsufficient] = useAtom(jotaiIsInsufficient);
-  const [isApproving, setIsApproving] = useState<boolean>(false);
-  const [isApproved, setIsApproved] = useState<boolean>(false);
+  const [isApproving] = useState<boolean>(false);
+  const [isApproved] = useState<boolean>(false);
   const handleApprove = () => {};
   const handleWrap = () => {};
   const handleUnWrap = () => {};
