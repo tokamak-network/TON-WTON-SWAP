@@ -2,9 +2,8 @@
 import { jotaiWrapUnwrapTransactionInfo } from "@/jotai/wrap-unwrap";
 import { Flex } from "@chakra-ui/react";
 import { useAtom } from "jotai";
-import { FromToNetworkComponent } from "../deposit-withdraw/FromToNetwork";
-import { TokenInputComponent } from "../deposit-withdraw/TokenInputComponent";
-
+import { FromToComponent } from "./FromToComponent";
+import { TokenInputComponent } from "./TokenInputComponent";
 export const WrapUnwrapComponent: React.FC = () => {
   // const { chain, isConnected } = useWalletConnect();
   const [transaction, setTransaction] = useAtom(jotaiWrapUnwrapTransactionInfo);
@@ -18,15 +17,8 @@ export const WrapUnwrapComponent: React.FC = () => {
         gap={"16px"}
         flexDir={"column"}
       >
-        <FromToNetworkComponent />
+        <FromToComponent />
         <TokenInputComponent />
-        {/* {transaction.amount && isConnected && (
-          <ReceiveAmountComponent
-            amount={transaction.formatted}
-            tokenSymbol={getBridgeToken(transaction)?.symbol ?? ""}
-          />
-        )}
-        {isConnected && <ToAddressComponent />} */}
       </Flex>
       {/* {needToApprove && !isApproved && isConnected && (
           <BigButtonComponent

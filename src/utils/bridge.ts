@@ -1,9 +1,15 @@
+import { WTonTokenByChainId } from "@/constants/token";
+import { TonTokenByChainId } from "@/constants/token";
 import {
   BridgeModeEnum,
   BridgeTokenEnum,
   BridgeTransactionInfo,
 } from "@/types/bridge";
 import { Token } from "@/types/token";
+import {
+  WrapUnwrapModeEnum,
+  WrapUnwrapTransactionInfo,
+} from "@/types/wrap-unwrap";
 
 export const getBridgeTokenType = (token: Token): BridgeTokenEnum => {
   switch (token.bridgedTokenSymbol) {
@@ -18,10 +24,10 @@ export const getBridgeTokenType = (token: Token): BridgeTokenEnum => {
   }
 };
 
-export const getBridgeToken = (transaction: BridgeTransactionInfo) => {
-  return transaction.mode === BridgeModeEnum.DEPOSIT
-    ? transaction.l1Token
-    : transaction.l2Token;
+export const getWrapUnwrapToken = (transaction: WrapUnwrapTransactionInfo) => {
+  return transaction.mode === WrapUnwrapModeEnum.WRAP
+    ? TonTokenByChainId[transaction.chain.id]
+    : WTonTokenByChainId[transaction.chain.id];
 };
 
 export const isValidTxHash = (txHash: string): boolean => {

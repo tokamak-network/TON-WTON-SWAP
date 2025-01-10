@@ -10,11 +10,12 @@ import { ButtonProps, Flex, Input, Text } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import React from "react";
 import { Button } from "../ui/button";
-import { TokenSelectionComponent } from "./TokenSelect";
 import { getParsedAmount, trimTokenBalance } from "@/utils/token-balance";
 import { useTokenBalance } from "@/hooks/bridge/useTokenBalance";
-import { getBridgeToken } from "@/utils/bridge";
+import { getWrapUnwrapToken } from "@/utils/bridge";
 import { useWalletConnect } from "@/hooks/wallet-connect/useWalletConnect";
+import { jotaiWrapUnwrapTransactionInfo } from "@/jotai/wrap-unwrap";
+import { WrapUnwrapTransactionInfo } from "@/types/wrap-unwrap";
 
 export const MaxBalanceButtonComponent: React.FC<ButtonProps> = (props) => {
   const { onClick, disabled } = props;
@@ -40,31 +41,31 @@ export const MaxBalanceButtonComponent: React.FC<ButtonProps> = (props) => {
 };
 
 export const TokenInputComponent: React.FC = () => {
-  const [transaction, setTransaction] = useAtom(jotaiBridgeTransactionInfo);
+  const [transaction, setTransaction] = useAtom(jotaiWrapUnwrapTransactionInfo);
   const { balance } = useTokenBalance(transaction);
-  const [, setIsTokenSelectModalOpen] = useAtom(jotaiTokenSelectModalOpen);
   const { isConnected } = useWalletConnect();
   const [, setIsInsufficient] = useAtom(jotaiIsInsufficient);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value: string = e.target.value === "." ? "0." : e.target.value;
+    const wrapUnwrapToken = getWrapUnwrapToken(transaction);
     const decimalPattern = new RegExp(
-      `^\\d+(\\.\\d{0,${transaction.l1Token?.decimals}})?$`
+      `^\\d+(\\.\\d{0,${wrapUnwrapToken?.decimals}})?$`
     );
     if (!decimalPattern.test(value) && value !== "") return;
     const amount =
       value.length === 0
         ? BigInt(0)
-        : getParsedAmount(value, transaction.l1Token?.decimals ?? 18);
+        : getParsedAmount(value, wrapUnwrapToken?.decimals ?? 18);
     if (balance && amount > balance.value) setIsInsufficient(true);
     else setIsInsufficient(false);
-    setTransaction((prev: BridgeTransactionInfo) => ({
+    setTransaction((prev: WrapUnwrapTransactionInfo) => ({
       ...prev,
       formatted: value,
       amount,
     }));
   };
   const handleMaxButtonClick = () => {
-    setTransaction((prev: BridgeTransactionInfo) => ({
+    setTransaction((prev: WrapUnwrapTransactionInfo) => ({
       ...prev,
       formatted: balance?.formatted ?? "0",
       amount: balance?.value ?? BigInt(0),
@@ -99,12 +100,6 @@ export const TokenInputComponent: React.FC = () => {
             border={"1px solid transparent"}
             _focus={{ outline: "none" }}
             onChange={handleChange}
-          />
-          <TokenSelectionComponent
-            tokenSymbol={getBridgeToken(transaction)?.symbol ?? ""}
-            onClick={() => {
-              setIsTokenSelectModalOpen(true);
-            }}
           />
         </Flex>
         {isConnected && (

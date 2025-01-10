@@ -3,7 +3,7 @@ import { useWalletConnect } from "../wallet-connect/useWalletConnect";
 import { useAtom } from "jotai";
 import { WrapUnwrapTransactionInfo } from "@/types/wrap-unwrap";
 import { jotaiWrapUnwrapTransactionInfo } from "@/jotai/wrap-unwrap";
-import { Address } from "viem";
+import { Address, Chain } from "viem";
 
 export const useWrapUnwrapInitiate = () => {
   const { isConnected, address, chain } = useWalletConnect();
@@ -14,8 +14,9 @@ export const useWrapUnwrapInitiate = () => {
       amount: BigInt(0),
       formatted: "0",
       address: address as Address,
+      chain: chain as Chain,
     }));
-  }, [address, isConnected, chain, transaction.mode, setTransaction]);
+  }, [address, isConnected, chain, setTransaction, transaction.mode]);
 
   return { transaction };
 };

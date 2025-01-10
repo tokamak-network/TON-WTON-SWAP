@@ -16,19 +16,8 @@ export const getTokenBalance = async (
   const balance = await getBalance(config, {
     address,
     token,
-    chainId,
+    chainId: chainId as 1 | 11155111,
   });
-  return balance;
-};
-
-export const getTokenBalanceByChainId = async (
-  address: `0x${string}`,
-  chainId: number,
-  token?: `0x${string}`
-): Promise<TokenBalance | null> => {
-  const tokenInfo = getTokenInfoByAddress(chainId, token);
-  if (!tokenInfo) return null;
-  const balance = await getTokenBalance(address, tokenInfo.address, chainId);
   return balance;
 };
 
