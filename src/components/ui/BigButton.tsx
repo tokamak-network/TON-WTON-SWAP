@@ -25,6 +25,7 @@ export const BigButtonComponent: React.FC<IBigButtonComponentProps> = ({
       lineHeight={"normal"}
       color={isLoading ? "#25282F" : disabled ? "#BBBEC6" : "#FFFFFF"}
       disabled={disabled || isLoading}
+      opacity={1}
       onClick={onClick}
     >
       {isLoading ? (

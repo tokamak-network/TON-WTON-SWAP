@@ -17,6 +17,7 @@ import { TransactionStatusEnum } from "@/types/transaction";
 import { useApprove } from "@/hooks/wrap-unwrap/useApprove";
 import { TonTokenByChainId, WTonTokenByChainId } from "@/constants/token";
 import { useWrap } from "@/hooks/wrap-unwrap/useWrap";
+import { ReceiveAmountComponent } from "./ReceiveAmountComponent";
 
 export const WrapUnwrapComponent: React.FC = () => {
   const { isConnected, chain } = useWalletConnect();
@@ -83,6 +84,14 @@ export const WrapUnwrapComponent: React.FC = () => {
       >
         <FromToComponent />
         <TokenInputComponent />
+        {transaction.amount && (
+          <ReceiveAmountComponent
+            amount={transaction.formatted}
+            tokenSymbol={
+              transaction.mode === WrapUnwrapModeEnum.WRAP ? "WTON" : "TON"
+            }
+          />
+        )}
       </Flex>
       {needToApprove && !isApproved && isConnected && (
         <BigButtonComponent

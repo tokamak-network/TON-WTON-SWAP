@@ -39,7 +39,7 @@ export const FromToComponent: React.FC = () => {
           fontWeight={400}
           lineHeight={"22px"}
         >
-          From
+          {transaction.mode}
         </Text>
         <Button
           width={"192px"}
@@ -84,7 +84,7 @@ export const FromToComponent: React.FC = () => {
           fontWeight={400}
           lineHeight={"22px"}
         >
-          To
+          {transaction.mode === WrapUnwrapModeEnum.WRAP ? "To" : "For"}
         </Text>
         <Button
           width={"192px"}

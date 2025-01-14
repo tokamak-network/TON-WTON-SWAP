@@ -2,8 +2,8 @@ import { Address } from "viem";
 import { Chain } from "wagmi/chains";
 
 export enum WrapUnwrapModeEnum {
-  WRAP = "wrap",
-  UNWRAP = "unwrap",
+  WRAP = "Wrap",
+  UNWRAP = "Unwrap",
 }
 
 export interface WrapUnwrapTransactionInfo {
