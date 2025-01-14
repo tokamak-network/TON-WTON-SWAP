@@ -35,6 +35,12 @@ Public Live Version: [https://tokamak-network-unwrapper.vercel.app/](https://tok
 ### Steps
 
 1. Clone the repository
-2. Run `npm install`
-3. Run `npm run dev`
-4. Visit `http://localhost:3000`
+2. Copy `.env.example` to `.env` and fill in the values
+3. Run `npm install`
+4. Run `npm run dev`
+5. Visit `http://localhost:3000`
+
+### Environment Variables(Optional)
+
+- `NEXT_PUBLIC_MAINNET_RPC_URL`: The RPC URL for the Ethereum mainnet
+- `NEXT_PUBLIC_SEPOLIA_RPC_URL`: The RPC URL for the Sepolia testnet
