@@ -24,7 +24,7 @@ export const WTonTokenByChainId: Record<number, Token> = {
   [mainnet.id]: {
     chainId: mainnet.id,
     isNativeCurrency: false,
-    address: "0x2be5e8c109e2197D077D13A82dAead6a9b3433C5",
+    address: "0xc4A11aaf6ea915Ed7Ac194161d2fC9384F15bff2",
     name: "Wrapped TON",
     symbol: "WTON",
     decimals: 27,
