@@ -12,7 +12,7 @@ export const useWrapUnwrapInitiate = () => {
     setTransaction((prev: WrapUnwrapTransactionInfo) => ({
       ...prev,
       amount: BigInt(0),
-      formatted: "0",
+      formatted: "",
       address: address as Address,
       chain: chain as Chain,
     }));
