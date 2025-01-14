@@ -26,7 +26,14 @@ export const useWrapUnwrapInitiate = () => {
       ...prev,
       isOpen: false,
     }));
-  }, [address, isConnected, chain, setTransaction, transaction.mode]);
+  }, [
+    address,
+    isConnected,
+    chain,
+    setTransaction,
+    transaction.mode,
+    setTransactionConfirmModalStatus,
+  ]);
 
   return { transaction };
 };
