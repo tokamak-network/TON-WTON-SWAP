@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { ConnectedNetworkAccount } from "../network/ConnectedNetworkAccount";
 import dynamic from "next/dynamic";
 import LogoIcon from "@/assets/icons/logo.svg";
@@ -28,16 +28,8 @@ const GNBComponentInner = () => {
           onClick={() => router.push("/")}
         >
           <Flex>
-            <Image src={LogoIcon} alt="logo" width={20} height={20} />
+            <Image src={LogoIcon} alt="logo" width={380} height={39} />
           </Flex>
-          <Text
-            fontSize={"16px"}
-            fontWeight={500}
-            lineHeight={"24px"}
-            color={"#FFFFFF"}
-          >
-            TON-WTON
-          </Text>
         </Flex>
       </Flex>
       <Flex position={"absolute"} right={"32px"} top={"20px"}>

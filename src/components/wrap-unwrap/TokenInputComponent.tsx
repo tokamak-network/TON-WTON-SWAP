@@ -11,6 +11,8 @@ import { getWrapUnwrapToken } from "@/utils/bridge";
 import { useWalletConnect } from "@/hooks/wallet-connect/useWalletConnect";
 import { jotaiWrapUnwrapTransactionInfo } from "@/jotai/wrap-unwrap";
 import { WrapUnwrapTransactionInfo } from "@/types/wrap-unwrap";
+import { FromTokenIcon, FromTokenName } from "@/constants/wrap-unwrap";
+import Image from "next/image";
 
 export const MaxBalanceButtonComponent: React.FC<ButtonProps> = (props) => {
   const { onClick, disabled } = props;
@@ -96,6 +98,17 @@ export const TokenInputComponent: React.FC = () => {
             _focus={{ outline: "none" }}
             onChange={handleChange}
           />
+          <Flex alignItems={"center"} gap={"8px"} mr={"20px"}>
+            <Image
+              src={FromTokenIcon[transaction.mode]}
+              alt="ton"
+              width={24}
+              height={24}
+            />
+            <Text fontSize={"16px"} fontWeight={500} lineHeight={"normal"}>
+              {FromTokenName[transaction.mode]}
+            </Text>
+          </Flex>
         </Flex>
         {isConnected && (
           <Flex gap={"6px"} alignItems={"center"} justifyContent={"flex-end"}>
