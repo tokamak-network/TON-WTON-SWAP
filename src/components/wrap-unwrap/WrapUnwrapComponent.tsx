@@ -70,7 +70,8 @@ export const WrapUnwrapComponent: React.FC = () => {
       console.error(error);
     }
   };
-  const needToApprove = transaction.mode === WrapUnwrapModeEnum.WRAP;
+  const needToApprove =
+    transaction.mode === WrapUnwrapModeEnum.WRAP && transaction.formatted;
   const isDisabled = isInsufficient || transaction.amount === BigInt(0);
   return (
     <Flex flexDir={"column"} gap={"32px"} width={"100%"}>
@@ -103,7 +104,7 @@ export const WrapUnwrapComponent: React.FC = () => {
       )}
       {transaction.mode === WrapUnwrapModeEnum.WRAP &&
         isConnected &&
-        isApproved && (
+        (isApproved || !transaction.formatted) && (
           <BigButtonComponent
             disabled={isDisabled}
             isLoading={
