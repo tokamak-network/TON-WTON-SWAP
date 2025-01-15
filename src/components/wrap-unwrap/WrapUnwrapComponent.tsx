@@ -96,7 +96,7 @@ export const WrapUnwrapComponent: React.FC = () => {
       >
         <FromToComponent />
         <TokenInputComponent />
-        {transaction.amount && (
+        {isConnected && transaction.amount && (
           <ReceiveAmountComponent
             amount={transaction.formatted}
             tokenSymbol={
