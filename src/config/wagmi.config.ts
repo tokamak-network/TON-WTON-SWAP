@@ -8,11 +8,11 @@ export const config = createConfig({
   connectors: [metaMask()],
   transports: {
     [mainnet.id]: fallback([
-      unstable_connector(injected),
+      unstable_connector(metaMask),
       http(env("NEXT_PUBLIC_MAINNET_RPC_URL")),
     ]),
     [sepolia.id]: fallback([
-      unstable_connector(injected),
+      unstable_connector(metaMask),
       http(env("NEXT_PUBLIC_SEPOLIA_RPC_URL")),
     ]),
   },
