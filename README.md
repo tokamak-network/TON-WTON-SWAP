@@ -26,9 +26,9 @@ Public Live Version: [https://tokamak-network-unwrapper.vercel.app/](https://tok
 
 ### Prerequisites
 
-- Node.js v22 or higher
+- Node.js v18.17.0 or higher
 - npm v10 or higher
-- A Web3 wallet (e.g., MetaMask) installed in your browser
+- Metamask wallet installed in your browser
 - Some ETH for gas fees on Ethereum or Sepolia network
 - TON or WTON tokens to wrap/unwrap
 
