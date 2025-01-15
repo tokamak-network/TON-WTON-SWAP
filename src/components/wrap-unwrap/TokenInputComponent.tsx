@@ -3,7 +3,7 @@
 import { jotaiIsInsufficient } from "@/jotai/bridge";
 import { ButtonProps, Flex, Input, Text } from "@chakra-ui/react";
 import { useAtom } from "jotai";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 import { getParsedAmount, trimTokenBalance } from "@/utils/token-balance";
 import { useTokenBalance } from "@/hooks/bridge/useTokenBalance";
@@ -42,6 +42,11 @@ export const TokenInputComponent: React.FC = () => {
   const { balance } = useTokenBalance(transaction);
   const { isConnected } = useWalletConnect();
   const [, setIsInsufficient] = useAtom(jotaiIsInsufficient);
+  useEffect(() => {
+    if (balance && transaction.amount > balance.value) setIsInsufficient(true);
+    else setIsInsufficient(false);
+  }, [balance, transaction.amount, setIsInsufficient]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value: string = e.target.value === "." ? "0." : e.target.value;
     const wrapUnwrapToken = getWrapUnwrapToken(transaction);

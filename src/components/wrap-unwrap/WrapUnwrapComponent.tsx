@@ -18,6 +18,7 @@ import { useApprove } from "@/hooks/wrap-unwrap/useApprove";
 import { TonTokenByChainId, WTonTokenByChainId } from "@/constants/token";
 import { useWrap } from "@/hooks/wrap-unwrap/useWrap";
 import { ReceiveAmountComponent } from "./ReceiveAmountComponent";
+import { useTONAllowance } from "@/hooks/wrap-unwrap/useAllowance";
 
 export const WrapUnwrapComponent: React.FC = () => {
   const { isConnected, chain } = useWalletConnect();
@@ -26,13 +27,24 @@ export const WrapUnwrapComponent: React.FC = () => {
     useAtom(jotaiTransactionConfirmModalStatus);
   const [isInsufficient] = useAtom(jotaiIsInsufficient);
   const [isApproving, setIsApproving] = useState<boolean>(false);
-  const [isApproved, setIsApproved] = useState<boolean>(false);
-  const { approve } = useApprove(setIsApproving, setIsApproved);
+  const [needToApprove, setNeedToApprove] = useState<boolean>(false);
+  const { approve } = useApprove(setIsApproving);
   const { unwrap } = useUnwrap();
   const { wrap } = useWrap();
+  const allowance = useTONAllowance();
+  useEffect(() => {
+    if (transaction.mode === WrapUnwrapModeEnum.WRAP && transaction.formatted)
+      setNeedToApprove(allowance < transaction.amount);
+    else setNeedToApprove(false);
+  }, [
+    allowance,
+    transaction.amount,
+    setNeedToApprove,
+    transaction.mode,
+    transaction.formatted,
+  ]);
   useEffect(() => {
     setIsApproving(false);
-    setIsApproved(false);
   }, [transaction]);
   const handleApprove = async () => {
     if (!isConnected || !chain) return;
@@ -70,8 +82,7 @@ export const WrapUnwrapComponent: React.FC = () => {
       console.error(error);
     }
   };
-  const needToApprove =
-    transaction.mode === WrapUnwrapModeEnum.WRAP && transaction.formatted;
+
   const isDisabled = isInsufficient || transaction.amount === BigInt(0);
   return (
     <Flex flexDir={"column"} gap={"32px"} width={"100%"}>
@@ -94,7 +105,7 @@ export const WrapUnwrapComponent: React.FC = () => {
           />
         )}
       </Flex>
-      {needToApprove && !isApproved && isConnected && (
+      {needToApprove && isConnected && (
         <BigButtonComponent
           disabled={isDisabled}
           content={isInsufficient ? "Insufficient balance" : "Approve"}
@@ -104,7 +115,7 @@ export const WrapUnwrapComponent: React.FC = () => {
       )}
       {transaction.mode === WrapUnwrapModeEnum.WRAP &&
         isConnected &&
-        (isApproved || !transaction.formatted) && (
+        !needToApprove && (
           <BigButtonComponent
             disabled={isDisabled}
             isLoading={

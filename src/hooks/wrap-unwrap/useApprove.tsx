@@ -1,19 +1,12 @@
 import { Address } from "viem";
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import { useWriteContract } from "wagmi";
 import ERC20_ABI from "@/abi/erc20.json";
 import { useEffect } from "react";
-export const useApprove = (
-  setIsApproving: (isApproving: boolean) => void,
-  setIsApproved: (isApproved: boolean) => void
-) => {
-  const { data: hash, isPending, writeContractAsync } = useWriteContract();
-  const { isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+export const useApprove = (setIsApproving: (isApproving: boolean) => void) => {
+  const { isPending, writeContractAsync } = useWriteContract();
   useEffect(() => {
     if (isPending) setIsApproving(true);
-    if (isConfirmed) setIsApproved(true);
-  }, [isPending, isConfirmed, setIsApproving, setIsApproved]);
+  }, [isPending, setIsApproving]);
   const approve = async (
     address: Address,
     spender: Address,
