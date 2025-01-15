@@ -1,5 +1,5 @@
 import { createConfig, http, unstable_connector, fallback } from "wagmi";
-import { injected, metaMask } from "wagmi/connectors";
+import { metaMask } from "wagmi/connectors";
 import { mainnet, sepolia } from "viem/chains";
 import { env } from "next-runtime-env";
 
