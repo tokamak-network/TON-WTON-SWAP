@@ -19,6 +19,7 @@ import { TonTokenByChainId, WTonTokenByChainId } from "@/constants/token";
 import { useWrap } from "@/hooks/wrap-unwrap/useWrap";
 import { ReceiveAmountComponent } from "./ReceiveAmountComponent";
 import { useTONAllowance } from "@/hooks/wrap-unwrap/useAllowance";
+import { getWrapUnwrapTokenBalance } from "@/utils/bridge";
 
 export const WrapUnwrapComponent: React.FC = () => {
   const { isConnected, chain } = useWalletConnect();
@@ -98,7 +99,10 @@ export const WrapUnwrapComponent: React.FC = () => {
         <TokenInputComponent />
         {isConnected && transaction.amount && (
           <ReceiveAmountComponent
-            amount={transaction.formatted}
+            amount={getWrapUnwrapTokenBalance(
+              transaction.mode,
+              transaction.formatted
+            )}
             tokenSymbol={
               transaction.mode === WrapUnwrapModeEnum.WRAP ? "WTON" : "TON"
             }

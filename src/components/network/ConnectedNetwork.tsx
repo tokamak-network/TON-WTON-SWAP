@@ -15,7 +15,8 @@ const ConnectedNetworkComponent: React.FC = () => {
   const handleNetworkSelect = async (chainId: number) => {
     if (isConnected) await switchChain(chainId);
   };
-  return (
+
+  return chain ? (
     <MenuRoot>
       <MenuTrigger asChild>
         <Button
@@ -42,6 +43,20 @@ const ConnectedNetworkComponent: React.FC = () => {
       </MenuTrigger>
       <NetworkListComponent onSelectNetwork={handleNetworkSelect} />
     </MenuRoot>
+  ) : (
+    <Button
+      px={"12px"}
+      py={"8px"}
+      borderRadius={"8px"}
+      border={"1px solid #DD3A44"}
+      fontWeight={500}
+      fontSize={"16px"}
+      lineHeight={"normal"}
+      height={"46px"}
+      color={"#DD3A44"}
+    >
+      Wrong network
+    </Button>
   );
 };
 
