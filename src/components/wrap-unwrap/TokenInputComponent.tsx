@@ -88,9 +88,11 @@ export const TokenInputComponent: React.FC = () => {
         border={"1px solid transparent"}
         _hover={{ border: "1px solid #555A64" }}
       >
-        <Flex alignItems={"center"}>
+        <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Input
+            truncate
             width={"100%"}
+            maxWidth={"298px"}
             height={"48px"}
             borderRadius={"6px"}
             bgColor={"#1D1F25"}
@@ -103,7 +105,7 @@ export const TokenInputComponent: React.FC = () => {
             _focus={{ outline: "none" }}
             onChange={handleChange}
           />
-          <Flex alignItems={"center"} gap={"8px"} mr={"20px"}>
+          <Flex alignItems={"center"} gap={"8px"} mr={"8px"}>
             <Image
               src={FromTokenIcon[transaction.mode]}
               alt="ton"

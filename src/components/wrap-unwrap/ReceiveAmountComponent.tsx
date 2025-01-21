@@ -18,7 +18,9 @@ export const ReceiveAmountComponent: React.FC<{
         px={"16px"}
         alignItems={"center"}
       >
-        <Text fontSize={"16px"}>{amount}</Text>
+        <Text truncate fontSize={"16px"} maxWidth={"321px"}>
+          {amount}
+        </Text>
         <Flex gap={"6px"} alignItems={"center"}>
           <TokenSymbolComponent
             tokenSymbol={tokenSymbol}
