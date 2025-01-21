@@ -40,7 +40,7 @@ export const MaxBalanceButtonComponent: React.FC<ButtonProps> = (props) => {
 export const TokenInputComponent: React.FC = () => {
   const [transaction, setTransaction] = useAtom(jotaiWrapUnwrapTransactionInfo);
   const { balance } = useTokenBalance(transaction);
-  const { isConnected } = useWalletConnect();
+  const { isConnected, chain } = useWalletConnect();
   const [, setIsInsufficient] = useAtom(jotaiIsInsufficient);
   useEffect(() => {
     if (balance && transaction.amount > balance.value) setIsInsufficient(true);
@@ -117,7 +117,7 @@ export const TokenInputComponent: React.FC = () => {
             </Text>
           </Flex>
         </Flex>
-        {isConnected && (
+        {isConnected && chain && (
           <Flex gap={"6px"} alignItems={"center"} justifyContent={"flex-end"}>
             <Text fontWeight={400} color={"#8C8F97"}>
               {`Balance: ${trimTokenBalance(balance?.formatted ?? "0", 2)}`}

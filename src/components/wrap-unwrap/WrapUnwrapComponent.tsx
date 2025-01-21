@@ -97,7 +97,7 @@ export const WrapUnwrapComponent: React.FC = () => {
       >
         <FromToComponent />
         <TokenInputComponent />
-        {isConnected && transaction.amount && (
+        {isConnected && chain && transaction.amount && (
           <ReceiveAmountComponent
             amount={getWrapUnwrapTokenBalance(
               transaction.mode,
@@ -109,7 +109,7 @@ export const WrapUnwrapComponent: React.FC = () => {
           />
         )}
       </Flex>
-      {needToApprove && isConnected && (
+      {needToApprove && isConnected && chain && (
         <BigButtonComponent
           disabled={isDisabled}
           content={isInsufficient ? "Insufficient balance" : "Approve"}
@@ -119,6 +119,7 @@ export const WrapUnwrapComponent: React.FC = () => {
       )}
       {transaction.mode === WrapUnwrapModeEnum.WRAP &&
         isConnected &&
+        chain &&
         !needToApprove && (
           <BigButtonComponent
             disabled={isDisabled}
@@ -130,17 +131,19 @@ export const WrapUnwrapComponent: React.FC = () => {
             onClick={handleWrap}
           />
         )}
-      {transaction.mode === WrapUnwrapModeEnum.UNWRAP && isConnected && (
-        <BigButtonComponent
-          disabled={isDisabled}
-          isLoading={
-            transactionConfirmModalStatus.status ===
-            TransactionStatusEnum.CONFIRMING
-          }
-          content={isInsufficient ? "Insufficient balance" : "Unwrap"}
-          onClick={handleUnWrap}
-        />
-      )}
+      {transaction.mode === WrapUnwrapModeEnum.UNWRAP &&
+        isConnected &&
+        chain && (
+          <BigButtonComponent
+            disabled={isDisabled}
+            isLoading={
+              transactionConfirmModalStatus.status ===
+              TransactionStatusEnum.CONFIRMING
+            }
+            content={isInsufficient ? "Insufficient balance" : "Unwrap"}
+            onClick={handleUnWrap}
+          />
+        )}
     </Flex>
   );
 };
